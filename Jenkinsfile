@@ -23,10 +23,12 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                echo "Deploy stage placeholder"
-            }
-        }
+    steps {
+        sh '''
+        scp -o StrictHostKeyChecking=no calculator.py ec2-user@13.61.26.104:/home/ec2-user/
+        '''
+    }
+}
 
     }
 }
