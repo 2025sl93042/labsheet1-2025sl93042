@@ -24,9 +24,13 @@ pipeline {
 
         stage('Deploy') {
     steps {
-        sh '''
-        scp -o StrictHostKeyChecking=no calculator.py ec2-user@13.61.26.104:/home/ec2-user/
-        '''
+        sshagent(['aws-key']) {
+            sh '''
+            scp -o StrictHostKeyChecking=no \
+            calculator.py \
+            ec2-user@13.61.26.104:/home/ec2-user/
+            '''
+        }
     }
 }
 
